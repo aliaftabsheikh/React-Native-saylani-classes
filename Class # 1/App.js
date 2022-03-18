@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput,Button, ScrollView, FlatList} from 'react-native';
+import { StyleSheet, Text, View, TextInput,Button, ScrollView, FlatList, TouchableOpacity} from 'react-native';
 
 export default function App() {
 
@@ -8,7 +8,7 @@ export default function App() {
   const [todolist, setTodoList] = useState([])
 
   const AddTodo = ()=>{
-    setTodoList(prevValue => [...prevValue, inputData])
+    setTodoList(prevValue => [...prevValue, {key : Date.now().toString(), data :inputData}]);
     console.log(inputData);
   }
   return (
@@ -19,7 +19,7 @@ export default function App() {
       </View>
 
       <View>
-        <FlatList data={todolist} renderItem={(item)=> <Text style={styles.listItem}>{item.item}</Text>
+        <FlatList data={todolist} renderItem={(item)=> <TouchableOpacity onPress={}><Text style={styles.listItem}>{item.item.data}</Text></TouchableOpacity>
         }/>
       </View>
 
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
    listItem:{
      padding: 10,
      margin:10,
-     backgroundColor: '#c42ea3',
+     backgroundColor: '#ccc',
      borderColor: '#000',
      borderStyle: 'solid',
      borderWidth: 1,
