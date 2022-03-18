@@ -11,6 +11,10 @@ export default function App() {
     setTodoList(prevValue => [...prevValue, {key : Date.now().toString(), data :inputData}]);
     console.log(inputData);
   }
+
+  const deleteTodo = (id)=>{
+    setTodoList(prevValue => prevValue.filter(item => item.key !== id));
+  }
   return (
     <View style={styles.container}>
       <View>
@@ -19,7 +23,7 @@ export default function App() {
       </View>
 
       <View>
-        <FlatList data={todolist} renderItem={(item)=> <TouchableOpacity onPress={}><Text style={styles.listItem}>{item.item.data}</Text></TouchableOpacity>
+        <FlatList data={todolist} renderItem={(item)=> <TouchableOpacity onPress={deleteTodo.bind(this, item.item.key)}><Text style={styles.listItem}>{item.item.data}</Text></TouchableOpacity>
         }/>
       </View>
 
